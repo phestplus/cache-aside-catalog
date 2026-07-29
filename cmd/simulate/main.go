@@ -3,7 +3,7 @@
 // claims to do: cache-aside reads work, concurrent misses on the same key
 // get collapsed into one store call (stampede protection), and writes
 // invalidate the cache. It's meant to be run against the docker-compose
-// stack by scripts/simulate.sh, not as a unit test — the point is to prove
+// stack by scripts/simulate.sh, not as a unit test. The point is to prove
 // the behavior over the network against real Redis, not against mocks.
 package main
 
@@ -74,10 +74,10 @@ func main() {
 	}
 	coalesced := after.storeCallsCoalesced - before.storeCallsCoalesced
 	fmt.Printf("fired %d concurrent requests for the same cold key in %s\n", *stampedeConcurrency, elapsed)
-	fmt.Printf("store calls coalesced by singleflight: %.0f (expected %d — every request but the first waited on it instead of hitting the store)\n",
+	fmt.Printf("store calls coalesced by singleflight: %.0f (expected %d, every request but the first waited on it instead of hitting the store)\n",
 		coalesced, *stampedeConcurrency-1)
 	if int(coalesced) != *stampedeConcurrency-1 {
-		fmt.Println("WARNING: coalesced count did not match expectation — stampede protection may not be working")
+		fmt.Println("WARNING: coalesced count did not match expectation, stampede protection may not be working")
 	}
 
 	fmt.Println("\n== 3. Read-heavy workload: seeding a small catalog and hammering it to measure hit ratio ==")
@@ -131,7 +131,7 @@ func main() {
 	if got.Name != newName {
 		fatalf("expected updated name %q after invalidation, got %q", newName, got.Name)
 	}
-	fmt.Printf("read-after-write returned the updated name (%q) — cache invalidation on update works\n", got.Name)
+	fmt.Printf("read-after-write returned the updated name (%q), cache invalidation on update works\n", got.Name)
 
 	fmt.Println("\nAll simulation phases completed successfully.")
 }
@@ -231,7 +231,7 @@ type metricsSnapshot struct {
 var metricLineRe = regexp.MustCompile(`^(\w+)(\{[^}]*\})?\s+([0-9eE+\-.]+)$`)
 
 // fetchMetrics does a minimal scrape of the Prometheus text exposition
-// format — full parsing isn't needed for three counters, and avoiding an
+// format. Full parsing isn't needed for three counters, and avoiding an
 // extra dependency keeps this load-generator a single self-contained file.
 func fetchMetrics(base string) (metricsSnapshot, error) {
 	resp, err := http.Get(base + "/metrics")

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # End-to-end demo: builds and starts the real stack (app + Redis via
 # docker-compose), then runs cmd/simulate against it over the network to
-# prove the cache-aside behavior actually holds — not against mocks.
+# prove the cache-aside behavior actually holds, not against mocks.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

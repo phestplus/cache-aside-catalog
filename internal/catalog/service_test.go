@@ -17,7 +17,7 @@ import (
 )
 
 // countingStore wraps InMemoryStore and counts GetProduct calls, so tests
-// can assert on how many times the "database" was actually hit — that
+// can assert on how many times the "database" was actually hit. That
 // count is the whole point of the stampede-protection test below.
 type countingStore struct {
 	*store.InMemoryStore

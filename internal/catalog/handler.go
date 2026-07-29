@@ -19,7 +19,7 @@ func NewHandler(svc *Service) *Handler {
 
 // Register wires routes onto mux using Go 1.22's method+path pattern
 // matching in net/http. A dedicated router library (chi/gorilla) wasn't
-// needed for a handful of routes — the stdlib does this natively now.
+// needed for a handful of routes, the stdlib does this natively now.
 func (h *Handler) Register(mux *http.ServeMux) {
 	mux.HandleFunc("GET /products", h.list)
 	mux.HandleFunc("POST /products", h.create)

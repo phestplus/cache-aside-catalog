@@ -11,8 +11,8 @@ import (
 
 // InMemoryStore simulates a slow relational database with an in-process map
 // plus artificial latency. This keeps the demo self-contained (no Postgres
-// container needed) while the project's actual subject under test — the
-// cache-aside layer in front of it — talks to a real Redis instance.
+// container needed) while the project's actual subject under test, the
+// cache-aside layer in front of it, talks to a real Redis instance.
 type InMemoryStore struct {
 	mu       sync.RWMutex
 	products map[string]model.Product

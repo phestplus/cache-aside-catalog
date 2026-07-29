@@ -24,7 +24,7 @@ import (
 //  1. Cache stampede: if 500 requests for the same cold key arrive at once,
 //     a naive implementation sends 500 identical requests to the store at
 //     the same moment. I use singleflight to collapse concurrent misses for
-//     the same key into one store call — the other 499 callers just wait for
+//     the same key into one store call. The other 499 callers just wait for
 //     that one call's result.
 //  2. Synchronized expiry: if every key gets the exact same TTL, keys that
 //     were written around the same time all expire at the same moment,
@@ -65,7 +65,7 @@ func (s *Service) GetProduct(ctx context.Context, id string) (model.Product, err
 			return p, nil
 		}
 	}
-	// A cache read error is treated as a miss rather than a failure — the
+	// A cache read error is treated as a miss rather than a failure. The
 	// store is the source of truth, so the correct behavior when the cache
 	// is unavailable is to serve from the store, not to error out.
 	metrics.CacheRequests.WithLabelValues("miss").Inc()
@@ -110,7 +110,7 @@ func (s *Service) CreateProduct(ctx context.Context, in model.CreateProductInput
 // UpdateProduct writes through to the store, then invalidates the cache
 // entry rather than updating it in place. Deleting is simpler and safer
 // than trying to keep a cached copy in sync with every possible partial
-// update — the next read just costs one cache miss.
+// update. The next read just costs one cache miss.
 func (s *Service) UpdateProduct(ctx context.Context, id string, in model.UpdateProductInput) (model.Product, error) {
 	p, err := s.store.UpdateProduct(ctx, id, in)
 	if err != nil {
