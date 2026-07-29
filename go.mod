@@ -1,4 +1,4 @@
-module github.com/ekelestephen/cache-aside-catalog
+module github.com/phestplus/cache-aside-catalog
 
 go 1.25.4
 

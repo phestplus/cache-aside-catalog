@@ -10,10 +10,10 @@ import (
 	"github.com/alicebob/miniredis/v2"
 	"github.com/redis/go-redis/v9"
 
-	"github.com/ekelestephen/cache-aside-catalog/internal/cache"
-	"github.com/ekelestephen/cache-aside-catalog/internal/catalog"
-	"github.com/ekelestephen/cache-aside-catalog/internal/model"
-	"github.com/ekelestephen/cache-aside-catalog/internal/store"
+	"github.com/phestplus/cache-aside-catalog/internal/cache"
+	"github.com/phestplus/cache-aside-catalog/internal/catalog"
+	"github.com/phestplus/cache-aside-catalog/internal/model"
+	"github.com/phestplus/cache-aside-catalog/internal/store"
 )
 
 // countingStore wraps InMemoryStore and counts GetProduct calls, so tests

@@ -5,7 +5,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/ekelestephen/cache-aside-catalog/internal/model"
+	"github.com/phestplus/cache-aside-catalog/internal/model"
 )
 
 var ErrNotFound = errors.New("product not found")

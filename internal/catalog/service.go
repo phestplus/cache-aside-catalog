@@ -8,10 +8,10 @@ import (
 
 	"golang.org/x/sync/singleflight"
 
-	"github.com/ekelestephen/cache-aside-catalog/internal/cache"
-	"github.com/ekelestephen/cache-aside-catalog/internal/metrics"
-	"github.com/ekelestephen/cache-aside-catalog/internal/model"
-	"github.com/ekelestephen/cache-aside-catalog/internal/store"
+	"github.com/phestplus/cache-aside-catalog/internal/cache"
+	"github.com/phestplus/cache-aside-catalog/internal/metrics"
+	"github.com/phestplus/cache-aside-catalog/internal/model"
+	"github.com/phestplus/cache-aside-catalog/internal/store"
 )
 
 // Service implements the cache-aside read pattern: check the cache first,

@@ -14,10 +14,10 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/redis/go-redis/v9"
 
-	"github.com/ekelestephen/cache-aside-catalog/internal/cache"
-	"github.com/ekelestephen/cache-aside-catalog/internal/catalog"
-	"github.com/ekelestephen/cache-aside-catalog/internal/metrics"
-	"github.com/ekelestephen/cache-aside-catalog/internal/store"
+	"github.com/phestplus/cache-aside-catalog/internal/cache"
+	"github.com/phestplus/cache-aside-catalog/internal/catalog"
+	"github.com/phestplus/cache-aside-catalog/internal/metrics"
+	"github.com/phestplus/cache-aside-catalog/internal/store"
 )
 
 func envOr(key, fallback string) string {

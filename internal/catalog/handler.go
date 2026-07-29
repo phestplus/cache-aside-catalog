@@ -5,8 +5,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/ekelestephen/cache-aside-catalog/internal/model"
-	"github.com/ekelestephen/cache-aside-catalog/internal/store"
+	"github.com/phestplus/cache-aside-catalog/internal/model"
+	"github.com/phestplus/cache-aside-catalog/internal/store"
 )
 
 type Handler struct {

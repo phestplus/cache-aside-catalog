@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ekelestephen/cache-aside-catalog/internal/model"
+	"github.com/phestplus/cache-aside-catalog/internal/model"
 )
 
 // InMemoryStore simulates a slow relational database with an in-process map
