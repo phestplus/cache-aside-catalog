@@ -45,7 +45,7 @@ flowchart LR
     Client -->|GET /products/id| Handler
     Handler --> Service
     Service -->|1. check| Cache[(Redis)]
-    Service -->|2. miss: singleflight-coalesced call| Store[(In-memory store\nsimulated DB latency)]
+    Service -->|2. miss: singleflight-coalesced call| Store[("In-memory store<br/>simulated DB latency")]
     Service -->|3. populate with jittered TTL| Cache
     Service -.->|hit/miss/coalesced counters| Metrics[Prometheus /metrics]
 ```
