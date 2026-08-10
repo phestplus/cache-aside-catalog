@@ -17,19 +17,18 @@ import (
 // Service implements the cache-aside read pattern: check the cache first,
 // fall back to the store on a miss, then populate the cache for next time.
 //
-// Two problems come with that pattern once you add real concurrency and
-// scale, and this service exists to prove I handled both rather than just
-// describe them:
+// Two problems come with that pattern once real concurrency and scale are
+// involved, and this service handles both:
 //
-//  1. Cache stampede: if 500 requests for the same cold key arrive at once,
-//     a naive implementation sends 500 identical requests to the store at
-//     the same moment. I use singleflight to collapse concurrent misses for
-//     the same key into one store call. The other 499 callers just wait for
+//  1. Cache stampede: when 500 requests for the same cold key arrive at
+//     once, a naive implementation sends 500 identical requests to the
+//     store at the same moment. singleflight collapses concurrent misses
+//     for the same key into one store call. The other 499 callers wait for
 //     that one call's result.
-//  2. Synchronized expiry: if every key gets the exact same TTL, keys that
-//     were written around the same time all expire at the same moment,
-//     recreating the stampede problem on a timer. I add random jitter on top
-//     of the base TTL so expirations spread out instead of landing together.
+//  2. Synchronized expiry: when every key gets the exact same TTL, keys
+//     written around the same time all expire at the same moment,
+//     recreating the stampede on a timer. Random jitter on top of the base
+//     TTL spreads expirations out instead of landing them together.
 type Service struct {
 	store     store.Store
 	cache     cache.Cache
